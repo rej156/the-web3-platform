@@ -13,8 +13,7 @@
     "watch-types": "tsc --watch",
     "prepare": "npm run build",
     "deploy": "np",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "precommit": "lint-staged"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -65,5 +64,10 @@
     "trailingComma": "es5",
     "singleQuote": true,
     "semi": true
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
