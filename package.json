@@ -55,16 +55,10 @@
   "dependencies": {},
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
-      "yarn check-types",
-      "yarn lint",
-      "yarn format",
-      "git add"
+      "yarn check-types"
     ],
     "index.{js,jsx,ts,tsx}": [
-      "yarn check-types",
-      "yarn lint",
-      "yarn format",
-      "git add"
+      "yarn check-types"
     ]
   },
   "prettier": {
