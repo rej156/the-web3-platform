@@ -7,6 +7,8 @@
   "scripts": {
     "start": "NODE_ENV=development babel -w --extensions '.ts' ./index.ts --out-dir dist",
     "build": "rimraf dist && NODE_ENV=production babel --extensions '.ts' ./index.ts --out-dir dist",
+    "format": "prettier --trailing-comma es5 --single-quote --write 'src/**/*' 'src/**/*' 'index.ts'",
+    "lint": "tslint '**/*.ts'",
     "check-types": "tsc",
     "watch-types": "tsc --watch",
     "prepare": "npm run build",
@@ -33,17 +35,33 @@
   "homepage": "https://github.com/rej156/the-web3-platform#readme",
   "devDependencies": {
     "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
+    "husky": "^1.1.2",
+    "lint-staged": "^8.0.3",
+    "prettier": "^1.14.3",
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0",
     "rimraf": "^2.6.2",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "tslint-react": "^3.6.0",
     "typescript": "^3.1.4"
   },
-  "dependencies": {
-    "@babel/core": "^7.1.2"
+  "dependencies": {},
+  "lint-staged": {
+    "**/*.{js,jsx}": [
+      "npm run format",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "semi": true
   }
 }
