@@ -55,6 +55,8 @@
   "dependencies": {},
   "lint-staged": {
     "**/*.{js,jsx}": [
+      "npm run check-types",
+      "npm run lint",
       "npm run format",
       "git add"
     ]
