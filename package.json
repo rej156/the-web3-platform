@@ -53,7 +53,7 @@
   },
   "dependencies": {},
   "lint-staged": {
-    "**/*.{js,jsx}": [
+    "**/*.{js,jsx,ts,tsx}": [
       "npm run check-types",
       "npm run lint",
       "npm run format",
