@@ -3,8 +3,16 @@
   "version": "1.0.0",
   "description": "React hooks for the web3 universe",
   "main": "index.js",
+  "types": "./index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "NODE_ENV=development babel -w --extensions '.ts' ./index.ts --out-dir dist",
+    "build": "rimraf dist && NODE_ENV=production babel --extensions '.ts' ./index.ts --out-dir dist",
+    "check-types": "tsc",
+    "watch-types": "tsc --watch",
+    "prepare": "npm run build",
+    "deploy": "np",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "precommit": "lint-staged"
   },
   "repository": {
     "type": "git",
@@ -22,5 +30,20 @@
   "bugs": {
     "url": "https://github.com/rej156/the-web3-platform/issues"
   },
-  "homepage": "https://github.com/rej156/the-web3-platform#readme"
+  "homepage": "https://github.com/rej156/the-web3-platform#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.1.0",
+    "react": "^16.7.0-alpha.0",
+    "react-dom": "^16.7.0-alpha.0",
+    "rimraf": "^2.6.2",
+    "typescript": "^3.1.4"
+  },
+  "dependencies": {
+    "@babel/core": "^7.1.2"
+  }
 }
