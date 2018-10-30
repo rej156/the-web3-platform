@@ -55,10 +55,14 @@
   "dependencies": {},
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
-      "yarn check-types"
+      "yarn lint",
+      "yarn format",
+      "git add"
     ],
     "index.{js,jsx,ts,tsx}": [
-      "yarn check-types"
+      "yarn lint",
+      "yarn format",
+      "git add"
     ]
   },
   "prettier": {
@@ -68,7 +72,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged && yarn check-types"
     }
   }
 }
