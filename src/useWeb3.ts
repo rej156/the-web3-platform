@@ -22,44 +22,62 @@ export default (payload: IuseWeb3Payload) => {
         await (window as IEthereumWindow).ethereum.enable();
         const web3 = new Web3((window as any).ethereum);
         // Acccounts now exposed
-        const web3IntervalId = useEffect(
+        useEffect(
           () => {
-            const isLocked = !(web3.eth.accounts.wallet as any).length;
+            const web3IntervalId = setInterval(() => {
+              const isLocked = !(web3.eth.accounts.wallet as any).length;
 
-            if (isLocked) {
-              setState({
-                ...state,
-                hasWeb3: true,
-                isLocked,
-              });
-            } else {
-              const web3Address = (web3.eth.accounts.wallet as any)[0].address;
+              if (isLocked) {
+                setState({
+                  ...state,
+                  hasWeb3: true,
+                  isLocked,
+                });
+              } else {
+                const web3Address = (web3.eth.accounts.wallet as any)[0]
+                  .address;
 
-              setState({
-                ...state,
-                hasWeb3: true,
-                isLocked: false,
-                loggedInAddressDifferent:
-                  payload.loggedInAddress === web3Address,
-                web3Address,
-              });
-            }
+                setState({
+                  ...state,
+                  hasWeb3: true,
+                  isLocked: false,
+                  loggedInAddressDifferent:
+                    payload.loggedInAddress === web3Address,
+                  web3Address,
+                });
+              }
+            }, 1000);
+            return () => clearInterval(web3IntervalId);
           },
           [state, payload]
         );
       } catch (error) {
         // User denied account access...
         // console.error('User declined access to web3 provider');
-        setState({
-          ...state,
-          hasWeb3: false,
-        });
+        throw new Error('User rejected web3 access');
       }
     }
     // Legacy dapp browsers...
     else if ((window as IEthereumWindow).web3) {
       const web3 = new Web3((window as IEthereumWindow).web3.currentProvider);
+      const web3Address = (web3.eth.accounts.wallet as any)[0].address;
       // Acccounts always exposed
+
+      useEffect(
+        () => {
+          const web3IntervalId = setInterval(() => {
+            setState({
+              ...state,
+              hasWeb3: true,
+              isLocked: false,
+              loggedInAddressDifferent: payload.loggedInAddress === web3Address,
+              web3Address,
+            });
+          });
+          return () => clearInterval(web3IntervalId);
+        },
+        [state, payload]
+      );
     }
     // Non-dapp browsers...
     else {
