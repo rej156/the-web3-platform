@@ -1,6 +1,6 @@
 {
   "name": "the-web3-platform",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React hooks for the web3 universe",
   "main": "dist/index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "check-types": "tsc",
     "watch-types": "tsc --watch",
     "prepare": "npm run build",
-    "deploy": "np",
+    "deploy": "npm publish",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -49,13 +49,12 @@
     "tslint-config-prettier": "^1.15.0",
     "tslint-eslint-rules": "^5.4.0",
     "tslint-react": "^3.6.0",
-    "typescript": "^3.1.4"
-  },
-  "dependencies": {
+    "typescript": "^3.1.4",
     "web3": "^1.0.0-beta.36",
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0"
   },
+  "dependencies": {},
   "peerDependencies": {
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0"
