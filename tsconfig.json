@@ -15,5 +15,5 @@
     // Import non-ES modules as default imports.
     "esModuleInterop": true
   },
-  "include": ["src", "index.ts", "react-hooks.d.ts", "window-ethereum.d.ts"]
+  "include": ["src", "react-hooks.d.ts", "window-ethereum.d.ts"]
 }

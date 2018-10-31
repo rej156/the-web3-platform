@@ -2,12 +2,11 @@
   "name": "the-web3-platform",
   "version": "1.0.0",
   "description": "React hooks for the web3 universe",
-  "main": "index.js",
-  "types": "./index.d.ts",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "NODE_ENV=development babel -w --extensions '.ts, .tsx' ./index.ts --out-dir dist",
-    "build": "rimraf dist && NODE_ENV=production babel --extensions '.ts, .tsx' ./index.ts --out-dir dist",
-    "format": "prettier --trailing-comma es5 --single-quote --write 'src/**/*' 'src/**/*' 'index.ts'",
+    "start": "NODE_ENV=development babel -w --extensions '.ts, .tsx' ./src --out-dir dist",
+    "build": "rimraf dist && NODE_ENV=production babel --extensions '.ts, .tsx'  ./src  --out-dir dist",
+    "format": "prettier --trailing-comma es5 --single-quote --write 'src/**/*' 'src/**/*'",
     "lint": "tslint '**/*.ts' '**/*.tsx'",
     "check-types": "tsc",
     "watch-types": "tsc --watch",
@@ -63,11 +62,6 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
-      "yarn format",
-      "yarn lint",
-      "git add"
-    ],
-    "index.{js,jsx,ts,tsx}": [
       "yarn format",
       "yarn lint",
       "git add"
