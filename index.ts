@@ -1,3 +1,2 @@
-import './src/index.ts';
-const hey = () => 1;
-hey();
+import useWeb3 from './src/useWeb3';
+export { useWeb3 };
