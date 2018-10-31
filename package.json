@@ -1,11 +1,11 @@
 {
   "name": "the-web3-platform",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React hooks for the web3 universe",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "start": "NODE_ENV=development babel -w --extensions '.ts, .tsx' ./src --out-dir dist",
-    "build": "rimraf dist && NODE_ENV=production babel --extensions '.ts, .tsx'  ./src  --out-dir dist",
+    "build": "rimraf dist && NODE_ENV=production tsc --noEmit false --allowJs false --isolatedModules false --declaration true --outDir dist",
     "format": "prettier --trailing-comma es5 --single-quote --write 'src/**/*' 'src/**/*'",
     "lint": "tslint '**/*.ts' '**/*.tsx'",
     "check-types": "tsc",
@@ -50,11 +50,12 @@
     "tslint-eslint-rules": "^5.4.0",
     "tslint-react": "^3.6.0",
     "typescript": "^3.1.4",
-    "web3": "^1.0.0-beta.36",
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "web3": "^1.0.0-beta.36"
+  },
   "peerDependencies": {
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0"

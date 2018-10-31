@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Web3 from 'web3';
 import { IEthereumWindow } from '../window-ethereum';
 
-interface IuseWeb3Payload {
+export interface IuseWeb3Payload {
   hasWeb3?: boolean;
   isLocked?: boolean;
   isLoggedIn: boolean;
