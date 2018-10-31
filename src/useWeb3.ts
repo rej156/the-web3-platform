@@ -3,16 +3,19 @@ import Web3 from 'web3';
 import { IEthereumWindow } from '../window-ethereum';
 
 export interface IuseWeb3Payload {
+  isLoggedIn: boolean;
+  loggedInAddress: string;
+}
+
+export interface IuseWeb3State extends IuseWeb3Payload {
   hasWeb3?: boolean;
   isLocked?: boolean;
-  isLoggedIn: boolean;
   loggedInAddressDifferent?: boolean;
-  loggedInAddress: string;
   web3Address?: boolean;
 }
 
-export default (payload: IuseWeb3Payload) => {
-  const [state, setState] = useState(payload);
+export default (payload: IuseWeb3Payload): IuseWeb3State => {
+  const [state, setState] = useState<IuseWeb3State>(payload);
 
   window.addEventListener('load', async () => {
     // Modern dapp browsers...
