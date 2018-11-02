@@ -5,6 +5,7 @@ import { IEthereumWindow } from '../window-ethereum';
 export interface IuseWeb3Payload {
   isLoggedIn: boolean;
   loggedInAddress: string;
+  desiredNetworkID: number;
 }
 
 export interface IuseWeb3State extends IuseWeb3Payload {
@@ -12,6 +13,7 @@ export interface IuseWeb3State extends IuseWeb3Payload {
   isLocked?: boolean;
   loggedInAddressDifferent?: boolean;
   web3Address?: boolean;
+  networkDifferent?: boolean;
 }
 
 export default (payload: IuseWeb3Payload): IuseWeb3State => {
@@ -27,14 +29,19 @@ export default (payload: IuseWeb3Payload): IuseWeb3State => {
         // Acccounts now exposed
         useEffect(
           () => {
-            const web3IntervalId = setInterval(() => {
+            const web3IntervalId = setInterval(async () => {
               const isLocked = !(web3.eth.accounts.wallet as any).length;
+              const currentNetwork = await web3.eth.net.getId;
+              const networkDifferent =
+                typeof currentNetwork === 'number' &&
+                currentNetwork === payload.desiredNetworkID;
 
               if (isLocked) {
                 setState({
                   ...state,
                   hasWeb3: true,
                   isLocked,
+                  networkDifferent,
                 });
               } else {
                 const web3Address = (web3.eth.accounts.wallet as any)[0]
@@ -46,6 +53,7 @@ export default (payload: IuseWeb3Payload): IuseWeb3State => {
                   isLocked: false,
                   loggedInAddressDifferent:
                     payload.loggedInAddress === web3Address,
+                  networkDifferent,
                   web3Address,
                 });
               }
@@ -64,6 +72,10 @@ export default (payload: IuseWeb3Payload): IuseWeb3State => {
     else if ((window as IEthereumWindow).web3) {
       const web3 = new Web3((window as IEthereumWindow).web3.currentProvider);
       const web3Address = (web3.eth.accounts.wallet as any)[0].address;
+      const currentNetwork = await web3.eth.net.getId;
+      const networkDifferent =
+        typeof currentNetwork === 'number' &&
+        currentNetwork === payload.desiredNetworkID;
       // Acccounts always exposed
 
       useEffect(
@@ -74,6 +86,7 @@ export default (payload: IuseWeb3Payload): IuseWeb3State => {
               hasWeb3: true,
               isLocked: false,
               loggedInAddressDifferent: payload.loggedInAddress === web3Address,
+              networkDifferent,
               web3Address,
             });
           });
